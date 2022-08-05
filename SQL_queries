@@ -1,0 +1,85 @@
+##Counts of Icd9_code from d_icd_diagnoses table - Total of 14567 icd9 codes##
+
+SELECT COUNT(DISTINCT icd9_code) FROM mimiciii.d_icd_diagnoses;
+	
+##Two most frequent ICD9 codes##
+
+SELECT COUNT(subject_id) AS total, icd9_code FROM mimiciii.diagnoses_icd GROUP BY icd9_code;
+
+##Extract data from the selected diagnosis codes - Data extraction query (query was taking too long to run without any limit on it)##
+
+SELECT 
+	a.hadm_id, 
+	a.subject_id, 
+	icd9_code, 
+	text
+FROM 
+	mimiciii.diagnoses_icd a
+INNER JOIN mimiciii.noteevents b
+	ON b.hadm_id = a.hadm_id
+WHERE 
+	icd9_code LIKE any (array['4019', '4280'])
+LIMIT 5000;
+
+##HTN diagnosis (4019 - HTN, NOS) - demographics##
+
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	c.gender,
+	c.dob
+FROM mimiciii.diagnoses_icd b 
+INNER JOIN mimiciii.patients c ON b.subject_id = c.subject_id WHERE b.icd9_code LIKE '4019'
+
+
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	d.ethnicity
+FROM mimiciii.diagnoses_icd b 
+INNER JOIN mimiciii.admissions d ON b.hadm_id = d.hadm_id WHERE b.icd9_code LIKE '4019'
+
+
+SELECT 
+	a.hadm_id, 
+	a.subject_id, 
+	a.text, 
+	b.icd9_code
+FROM mimiciii.noteevents a
+INNER JOIN mimiciii.diagnoses_icd b ON a.hadm_id = b.hadm_id WHERE b.icd9_code LIKE '4019'
+LIMIT 8000;
+
+##Same for non-HTN diagnosis##
+
+SELECT setseed(0.123);
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	c.gender,
+	c.dob
+FROM mimiciii.diagnoses_icd b 
+INNER JOIN mimiciii.patients c ON b.subject_id = c.subject_id WHERE b.icd9_code NOT LIKE '4019'
+ORDER BY random()
+LIMIT 8000;
+
+
+SELECT setseed(0.123);
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	d.ethnicity
+FROM mimiciii.diagnoses_icd b 
+INNER JOIN mimiciii.admissions d ON b.hadm_id = d.hadm_id WHERE b.icd9_code NOT LIKE '4019'
+ORDER BY random()
+LIMIT 8000;
+
+
+SELECT setseed(0.123);
+SELECT 
+	a.hadm_id, 
+	a.subject_id, 
+	a.text, 
+	b.icd9_code
+FROM mimiciii.noteevents a
+INNER JOIN mimiciii.diagnoses_icd b ON a.hadm_id = b.hadm_id WHERE b.icd9_code NOT LIKE '4019'
+LIMIT 8000;
