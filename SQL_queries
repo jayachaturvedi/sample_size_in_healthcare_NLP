@@ -13,6 +13,14 @@ CREATE VIEW doc_count AS
   FROM mimiciii.noteevents a
   INNER JOIN mimiciii.diagnoses_icd b ON a.hadm_id = b.hadm_id
   GROUP BY a.subject_id
+  
+---or on Google BigQuery---
+
+SELECT a.subject_id, COUNT(a.subject_id) AS no_of_docs
+FROM physionet-data.mimiciii_notes.noteevents a
+INNER JOIN physionet-data.mimiciii_clinical.diagnoses_icd b ON a.hadm_id = b.hadm_id
+GROUP BY a.subject_id
+
 
 
 ##Extract patients with HTN diagnosis (4019 - HTN, NOS) ##
@@ -50,4 +58,64 @@ INNER JOIN mimiciii.noteevents e ON b.subject_id = e.subject_id
 INNER JOIN mimiciii.doc_count f ON b.subject_id = f.subject_id
 WHERE b.icd9_code NOT LIKE '4019' AND f.no_of_docs <=50
 LIMIT 20000;
+
+
+### diabetes lookup on BigQuery ###
+
+SELECT a.ICD9_CODE, a.SHORT_TITLE, a.LONG_TITLE,
+COUNT (b.ICD9_CODE) AS diagnosis_count
+FROM physionet-data.mimiciii_clinical.d_icd_diagnoses a, physionet-data.mimiciii_clinical.diagnoses_icd b
+WHERE a.ICD9_CODE LIKE '250%' AND a.ICD9_CODE=b.ICD9_CODE
+---WHERE a.LONG_TITLE LIKE '%diabet%'
+GROUP BY ICD9_CODE, SHORT_TITLE, LONG_TITLE
+ORDER BY diagnosis_count DESC
+LIMIT 10;
+
+### more counts on BigQuery ###
+
+SELECT Count(DISTINCT subject_id) 
+FROM physionet-data.mimiciii_clinical.diagnoses_icd
+---FROM physionet-data.mimiciii_clinical.patients
+WHERE icd9_code LIKE '4019' --- or replace with '25000' for diabetes
+
+SELECT Count(DISTINCT d.HADM_ID) as count
+FROM physionet-data.mimiciii_clinical.admissions d
+INNER JOIN physionet-data.mimiciii_clinical.diagnoses_icd b ON b.subject_id = d.subject_id 
+WHERE icd9_code LIKE '4019' --- or replace with '25000' for diabetes
+
+### diabetes text from BigQuery ###
+
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	c.gender,
+	c.dob,
+	d.ethnicity,
+	e.text,
+	f.no_of_docs
+FROM physionet-data.mimiciii_clinical.diagnoses_icd b 
+INNER JOIN physionet-data.mimiciii_clinical.patients c ON b.subject_id = c.subject_id
+INNER JOIN physionet-data.mimiciii_clinical.admissions d ON b.subject_id = d.subject_id 
+INNER JOIN physionet-data.mimiciii_notes.noteevents e ON b.subject_id = e.subject_id
+INNER JOIN bert-327414.no_of_docs_view.count_docs_mimiciii f ON b.subject_id = f.subject_id
+WHERE b.icd9_code LIKE '25000' AND f.no_of_docs <=50;
+
+
+### non-diabetes text from BigQuery ###
+
+SELECT 
+	b.subject_id,
+	b.icd9_code,
+	c.gender,
+	c.dob,
+	d.ethnicity,
+	e.text,
+	f.no_of_docs
+FROM physionet-data.mimiciii_clinical.diagnoses_icd b 
+INNER JOIN physionet-data.mimiciii_clinical.patients c ON b.subject_id = c.subject_id
+INNER JOIN physionet-data.mimiciii_clinical.admissions d ON b.subject_id = d.subject_id 
+INNER JOIN physionet-data.mimiciii_notes.noteevents e ON b.subject_id = e.subject_id
+INNER JOIN bert-327414.no_of_docs_view.count_docs_mimiciii f ON b.subject_id = f.subject_id
+WHERE b.icd9_code NOT LIKE '250%' AND f.no_of_docs <=50
+LIMIT 5000;
 
