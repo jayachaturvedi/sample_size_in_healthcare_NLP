@@ -14,3 +14,6 @@ This python file contains code to generate and analyse demographic distributions
 
 *samplesize_build_classifiers_incl_bert.ipynb*:
 This python file contains code used to generate the different classifiers and the different variations in parameters, like sample size and class proportions. This includes both BERT and non-BERT classifiers. Please bear in mind that this notebook is a bit messy, but I have tried to somewhat clean it up so it is decent-ish for now!
+
+*results folder*:
+This folder contains results for all sample sizes and class proportions.
