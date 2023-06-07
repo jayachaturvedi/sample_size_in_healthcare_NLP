@@ -1,6 +1,9 @@
 # sample_size_in_healthcare_NLP
 This repository lists out the codes and queries used in conducting a simulation to make recommendations on sample sizes for training data used in healthcare NLP.
 
+# Interactive Dashboard of Results:
+https://docs.google.com/spreadsheets/d/1_XssYdseh44vNAa-UqMp8rlJNVMib-7KTbtAfmc47xE/edit?usp=sharing
+
 # Details of files
 
 *SQL_queries*: 
