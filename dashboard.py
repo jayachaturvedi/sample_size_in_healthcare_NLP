@@ -117,7 +117,7 @@ def generate_line_graph(sample_size, class_proportion):
 
 
 
-st.title('Interactive Dashboard \nHypertension Diagnosis')   
+st.title('Sample Size Interactive Dashboard \nHypertension Diagnosis')   
 # Add text using st.write()
 st.write("Please select a sample size and class proportion below to see results for all classifiers.") 
 sample_size = st.selectbox('Select Sample Size:', sample_sizes)
