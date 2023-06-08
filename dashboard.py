@@ -76,13 +76,20 @@ sample_sizes = [key.split('_')[0] for key in keys]
 class_proportions = [key.split('_')[1] for key in keys]
 #print(class_proportions)'''
 
-sample_sizes = []
-class_proportions = []
+sample_sizes = [200, 400, 600, 800, 1000, 2000, 3000, 4000, 5000]
+class_proportions = {
+    '50/50': (0.5, 0.5),
+    '60/40': (0.6, 0.4),
+    '70/30': (0.7, 0.3),
+    '80/20': (0.8, 0.2),
+    '90/10': (0.9, 0.1)
+    # Add more class proportions here
+}
 
-for key in classifier_scores_by_options.keys():
-    parts = key.split('_')
-    sample_sizes.append(parts[0])
-    class_proportions.append(parts[1])
+#for key in classifier_scores_by_options.keys():
+    #parts = key.split('_')
+    #sample_sizes.append(parts[0])
+    #class_proportions.append(parts[1])
 
 def generate_line_graph(sample_size, class_proportion):
     # Retrieve the class proportion label
