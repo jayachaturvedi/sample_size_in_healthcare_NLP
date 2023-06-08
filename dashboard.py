@@ -106,13 +106,16 @@ def generate_line_graph(sample_size, class_proportion):
     plt.ylabel('F1-Score (weighted average)')
     plt.title(f'Performance Results for Sample Size: {sample_size}, Class Proportion: {class_proportion_label}')
     plt.xticks(rotation=45)
+    
+    # Set the y-axis limits
+    plt.gca().set_ylim(0.20, 0.90)
    
     
     # Display the graph in Streamlit
     #st.pyplot()
     st.pyplot(plt.gcf())
     
-    
+    plt.savefig("plot.png")
     
 
 
