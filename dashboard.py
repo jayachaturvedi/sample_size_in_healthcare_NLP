@@ -100,7 +100,7 @@ def generate_line_graph(sample_size, class_proportion):
     classifier_scores_values = list(classifier_scores.values())
     
     # Generate the line graph
-    plt.ylim(0, 1)  # Set the y-axis limits
+    plt.ylim(0.20, 0.90)  # Set the y-axis limits
     plt.plot(classifier_labels, classifier_scores_values, marker='o')
     plt.xlabel('Classifier')
     plt.ylabel('F1-Score (weighted average)')
@@ -109,12 +109,13 @@ def generate_line_graph(sample_size, class_proportion):
    
     
     # Display the graph in Streamlit
-    st.pyplot()
+    #st.pyplot()
+    st.pyplot(plt.gcf())
     
 
 
 
-st.title('Interactive Dashboard')    
+st.title('Interactive Dashboard \nHypertension Diagnosis')    
 sample_size = st.selectbox('Select Sample Size:', sample_sizes)
 class_proportion = st.selectbox('Select Class Proportion:', class_proportions)
 
