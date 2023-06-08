@@ -100,12 +100,13 @@ def generate_line_graph(sample_size, class_proportion):
     classifier_scores_values = list(classifier_scores.values())
     
     # Generate the line graph
+    plt.ylim(0, 1)  # Set the y-axis limits
     plt.plot(classifier_labels, classifier_scores_values, marker='o')
     plt.xlabel('Classifier')
     plt.ylabel('F1-Score (weighted average)')
     plt.title(f'Performance Results for Sample Size: {sample_size}, Class Proportion: {class_proportion_label}')
     plt.xticks(rotation=45)
-    plt.ylim(0, 1)  # Set the y-axis limits
+   
     
     # Display the graph in Streamlit
     st.pyplot()
