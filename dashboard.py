@@ -66,15 +66,7 @@ classifier_scores_by_options = {
     # Add more combinations of sample size and class proportion here
 }
 
-'''keys = list(classifier_scores_by_options.keys())
 
-# Creating a list for sample sizes
-sample_sizes = [key.split('_')[0] for key in keys]
-#print(sample_sizes)
-
-# Creating a list for class proportions
-class_proportions = [key.split('_')[1] for key in keys]
-#print(class_proportions)'''
 
 sample_sizes = [200, 400, 600, 800, 1000, 2000, 3000, 4000, 5000]
 class_proportions = {
@@ -118,11 +110,7 @@ def generate_line_graph(sample_size, class_proportion):
     # Display the graph in Streamlit
     st.pyplot()
     
-'''if options_key in classifier_scores_by_options:
-    classifier_scores = classifier_scores_by_options[options_key]
-    # Rest of the code that uses classifier_scores
-else:
-    print(f"The key '{options_key}' does not exist in the dictionary.")'''
+
 
 
 st.title('Interactive Dashboard')    
