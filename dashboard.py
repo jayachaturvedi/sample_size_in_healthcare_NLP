@@ -109,6 +109,9 @@ def generate_line_graph(sample_size, class_proportion):
     
     # Set the y-axis limits
     plt.gca().set_ylim(0.20, 0.90)
+    
+    # Set the desired y-axis tick values
+    plt.yticks([0.20, 0.40, 0.60, 0.80])
    
     
     # Display the graph in Streamlit
