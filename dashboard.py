@@ -112,12 +112,19 @@ def generate_line_graph(sample_size, class_proportion):
     #st.pyplot()
     st.pyplot(plt.gcf())
     
+    
+    
 
 
 
-st.title('Interactive Dashboard \nHypertension Diagnosis')    
+st.title('Interactive Dashboard \nHypertension Diagnosis')   
+# Add text using st.write()
+st.write("Please select a sample size and class proportion below to see results for all classifiers.") 
 sample_size = st.selectbox('Select Sample Size:', sample_sizes)
 class_proportion = st.selectbox('Select Class Proportion:', class_proportions)
+
+
+
 
 # Retrieve the class proportion values based on the selected label
 selected_class_proportion = class_proportions[class_proportion]
