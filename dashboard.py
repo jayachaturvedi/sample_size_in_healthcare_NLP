@@ -90,10 +90,12 @@ class_proportions = {
     #parts = key.split('_')
     #sample_sizes.append(parts[0])
     #class_proportions.append(parts[1])
+    
+
 
 def generate_line_graph(sample_size, class_proportion):
     # Retrieve the class proportion label
-    class_proportion_label = f"{class_proportion[0]*100}/{class_proportion[1]*100}"
+    class_proportion_label = f"{int(class_proportion[0]*100)}/{int(class_proportion[1]*100)}"
     
     # Generate a unique key for the selected options
     options_key = f"{sample_size}_{class_proportion_label}"
@@ -115,6 +117,13 @@ def generate_line_graph(sample_size, class_proportion):
     
     # Display the graph in Streamlit
     st.pyplot()
+    
+'''if options_key in classifier_scores_by_options:
+    classifier_scores = classifier_scores_by_options[options_key]
+    # Rest of the code that uses classifier_scores
+else:
+    print(f"The key '{options_key}' does not exist in the dictionary.")'''
+
 
 st.title('Interactive Dashboard')    
 sample_size = st.selectbox('Select Sample Size:', sample_sizes)
