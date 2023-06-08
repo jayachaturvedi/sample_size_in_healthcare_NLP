@@ -101,7 +101,7 @@ def generate_line_graph(sample_size, class_proportion):
     classifier_labels = list(classifier_scores.keys())
     classifier_scores_values = list(classifier_scores.values())
     
-    # Create a DataFrame from the data
+    '''# Create a DataFrame from the data
     data = pd.DataFrame({'Classifier': classifier_labels, 'F1-Score': classifier_scores_values})
     
     # Set the style for the plot
@@ -128,11 +128,16 @@ def generate_line_graph(sample_size, class_proportion):
     plt.savefig('seaborn_plot.png')
     
     # Display the graph in Streamlit
-    st.pyplot()
+    st.pyplot()'''
     
     
     
-    '''# Generate the line graph
+    # Generate the line graph
+    from matplotlib.pyplot import figure
+
+    figure(figsize=(8, 6), dpi=80)
+    
+    
     plt.ylim(0.20, 0.90)  # Set the y-axis limits
     plt.plot(classifier_labels, classifier_scores_values, marker='o')
     plt.xlabel('Classifier')
@@ -141,7 +146,10 @@ def generate_line_graph(sample_size, class_proportion):
     plt.xticks(rotation=45)
     
     # Set the y-axis limits
-    plt.gca().set_ylim(0.20, 0.90)
+    #plt.gca().set_ylim(0.20, 0.90)
+    ax = plt.gca()
+    
+    ax.set_ylim([0.20, 0.90])
     
     # Set the desired y-axis tick values
     plt.yticks([0.20, 0.40, 0.60, 0.80])
@@ -151,7 +159,7 @@ def generate_line_graph(sample_size, class_proportion):
     #st.pyplot()
     st.pyplot(plt.gcf())
     
-    plt.savefig("plot.png")'''
+    plt.savefig("plot.png")
     
 
 
