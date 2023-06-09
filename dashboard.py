@@ -101,34 +101,6 @@ def generate_line_graph(sample_size, class_proportion):
     classifier_labels = list(classifier_scores.keys())
     classifier_scores_values = list(classifier_scores.values())
     
-    '''# Create a DataFrame from the data
-    data = pd.DataFrame({'Classifier': classifier_labels, 'F1-Score': classifier_scores_values})
-    
-    # Set the style for the plot
-    sns.set_style("whitegrid")
-    
-    # Create the line plot
-    ax = sns.lineplot(data=data, x='Classifier', y='F1-Score', marker='o')
-    
-    # Set the y-axis limits
-    ax.set_ylim(0.20, 0.90)
-    
-    # Set the desired y-axis tick values
-    ax.set_yticks([0.20, 0.40, 0.60, 0.80])
-    
-    # Set the labels and title
-    ax.set_xlabel('Classifier')
-    ax.set_ylabel('F1-Score (weighted average)')
-    ax.set_title(f'Performance Results for Sample Size: {sample_size}, Class Proportion: {class_proportion_label}')
-    
-    # Rotate the x-axis labels
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
-    
-    # Save the plot as a PNG image
-    plt.savefig('seaborn_plot.png')
-    
-    # Display the graph in Streamlit
-    st.pyplot()'''
     
     
     
