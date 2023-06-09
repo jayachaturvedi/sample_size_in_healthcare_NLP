@@ -3,8 +3,10 @@ This repository lists out the codes and queries used in conducting a simulation 
 
 # Interactive Dashboard of Results:
 
+[WORK IN PROGRESS]
 https://jayachaturvedi-sample-size-in-healthcare-nlp-dashboard-poic0t.streamlit.app/
 
+[GOOGLE SHEETS]
 https://docs.google.com/spreadsheets/d/1_XssYdseh44vNAa-UqMp8rlJNVMib-7KTbtAfmc47xE/edit?usp=sharing
 
 # Details of files
